@@ -12,13 +12,13 @@ export default function Category(){
     "use server"
     
     const name = formData.get("name")
-
+  
     if(name === "") return;
-
+  
     const data = { name }
-
-    const token = getCookieServer();
-
+  
+    const token = await getCookieServer();
+  
     await api.post("/category", data, {
       headers:{
         Authorization: `Bearer ${token}`
@@ -27,9 +27,10 @@ export default function Category(){
       console.log(err);
       return;
     })
-
+  
     redirect("/dashboard")
   }
+  
 
   return(
     <main className={styles.container}>
